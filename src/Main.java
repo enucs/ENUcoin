@@ -1,29 +1,36 @@
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Main {
-    public static Blockchain firstBlock() {
-        return new Blockchain(0, Instant.now(), "Starting block", "0");
-    }
-
-    public static Blockchain nextBlock(Blockchain lastBlock) {
-        int nextIndex = lastBlock.index + 1;
-        return new Blockchain(nextIndex, Instant.now(), Integer.toString(nextIndex), lastBlock.hash);
-    }
-
     public static void main(String[] args) {
-        ArrayList<Blockchain> blockchains = new ArrayList<>();
-        blockchains.add(firstBlock());
-        Blockchain previousBlock = blockchains.get(0);
+        ArrayList<Blockchain<String>> blockchains = new ArrayList<>();
 
-        for(int i = 0; i < 20; ++i) {
-            Blockchain blockToAdd = nextBlock(previousBlock);
-            blockchains.add(blockToAdd);
-            previousBlock = blockToAdd;
-        }
+        //Add genesis block to blockchain
+        //This is a block without a previous hash so it needs to just have some dummy data
+        Blockchain<String> previousBlock = new Blockchain<>(0, Instant.EPOCH, "Genesis block", "RW51Y3M/IE1vcmUgbGlrZSBldW51Y2hz");
+        blockchains.add(previousBlock);
 
-        for(Blockchain bc : blockchains) {
-            System.out.println(String.format("%d: %s\n%s", bc.index, bc.data, bc.hash));
+        Scanner input = new Scanner(System.in);
+        String flag;
+
+        do {
+            System.out.print("Enter data: ");
+            String data = input.nextLine();
+            Blockchain<String> block = new Blockchain<>(previousBlock.index+1, Instant.now(), data, previousBlock.hash);
+            blockchains.add(block);
+            previousBlock = block;
+
+            System.out.print("Enter more data (y/n): ");
+            flag = input.nextLine();
+            flag = flag.toLowerCase();
+
+        } while(flag.equals("y"));
+
+        input.close();
+
+        for(Blockchain<String> b : blockchains) {
+            System.out.println(b.toString());
         }
     }
 }
