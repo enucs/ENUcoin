@@ -1,15 +1,16 @@
 import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.time.Instant;
 import java.util.Base64;
 
-public class Blockchain {
+public class Blockchain<T> {
     public int index;
     public Instant timestamp;
-    public String data;
+    public T data;
     public String previousHash;
     public String hash;
 
-    public Blockchain(int index, Instant timestamp, String data, String previousHash) {
+    public Blockchain(int index, Instant timestamp, T data, String previousHash) {
         this.index = index;
         this.timestamp = timestamp;
         this.data = data;
@@ -19,7 +20,6 @@ public class Blockchain {
 
     private String makeHash() {
         MessageDigest digest;
-
         try {
             digest = MessageDigest.getInstance("SHA-256");
             String fullString = String.format("%s%s%s%s", index, timestamp.toString(), data, previousHash);
@@ -27,10 +27,21 @@ public class Blockchain {
 
             return Base64.getEncoder().encodeToString(hash);
 
-        } catch(Exception e) {
+        } catch(NoSuchAlgorithmException e) {
             System.out.println(e.getMessage());
         }
 
         return "";
+    }
+
+    @Override
+    public String toString() {
+        return "Blockchain{" +
+                "index=" + index +
+                ", timestamp=" + timestamp +
+                ", data=" + data +
+                ", previousHash='" + previousHash + '\'' +
+                ", hash='" + hash + '\'' +
+                '}';
     }
 }
