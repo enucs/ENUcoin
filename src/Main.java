@@ -8,7 +8,7 @@ public class Main {
 
         //Add genesis block to blockchain
         //This is a block without a previous hash so it needs to just have some dummy data
-        Block previousBlock = new Block(0, Instant.EPOCH, new Transaction("", "", Instant.EPOCH, 0), "RW51Y3M/IE1vcmUgbGlrZSBldW51Y2hz");
+        Block previousBlock = new Block(0, Instant.EPOCH, new Transaction("", "", Instant.EPOCH, 0.0), "RW51Y3M/IE1vcmUgbGlrZSBldW51Y2hz");
         blockchains.add(previousBlock);
 
         Scanner input = new Scanner(System.in);
@@ -17,7 +17,7 @@ public class Main {
         do {
             System.out.print("Enter data: ");
             String data = input.nextLine();
-            Block block = new Block(previousBlock.getIndex()+1, Instant.now(), new Transaction("a", "b", Instant.now(), 1), previousBlock.getHash());
+            Block block = new Block(previousBlock.getIndex()+1, Instant.now(), new Transaction("a", "b", Instant.now(), 1.0), previousBlock.getHash());
             blockchains.add(block);
             previousBlock = block;
 

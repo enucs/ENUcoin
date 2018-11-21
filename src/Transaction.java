@@ -6,9 +6,9 @@ public class Transaction {
     private String sender;
     private String recipient;
     private Instant paymentTime;
-    private double amount;
+    private Double amount;
 
-    public Transaction(String sender, String recipient, Instant paymentTime, double amount) {
+    public Transaction(String sender, String recipient, Instant paymentTime, Double amount) {
         this.sender = sender;
         this.recipient = recipient;
         this.paymentTime = paymentTime;
