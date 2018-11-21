@@ -4,11 +4,11 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        ArrayList<Blockchain<String>> blockchains = new ArrayList<>();
+        ArrayList<Block> blockchains = new ArrayList<>();
 
         //Add genesis block to blockchain
         //This is a block without a previous hash so it needs to just have some dummy data
-        Blockchain<String> previousBlock = new Blockchain<>(0, Instant.EPOCH, "Genesis block", "RW51Y3M/IE1vcmUgbGlrZSBldW51Y2hz");
+        Block previousBlock = new Block(0, Instant.EPOCH, new Transaction("", "", Instant.EPOCH, 0), "RW51Y3M/IE1vcmUgbGlrZSBldW51Y2hz");
         blockchains.add(previousBlock);
 
         Scanner input = new Scanner(System.in);
@@ -17,7 +17,7 @@ public class Main {
         do {
             System.out.print("Enter data: ");
             String data = input.nextLine();
-            Blockchain<String> block = new Blockchain<>(previousBlock.index+1, Instant.now(), data, previousBlock.hash);
+            Block block = new Block(previousBlock.getIndex()+1, Instant.now(), new Transaction("a", "b", Instant.now(), 1), previousBlock.getHash());
             blockchains.add(block);
             previousBlock = block;
 
@@ -29,8 +29,8 @@ public class Main {
 
         input.close();
 
-        for(Blockchain<String> b : blockchains) {
-            System.out.println(b.toString());
+        for(Block b : blockchains) {
+            System.out.println(b.toJSON());
         }
     }
 }
