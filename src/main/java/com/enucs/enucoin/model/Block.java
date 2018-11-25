@@ -1,7 +1,8 @@
-package com.enucs.enucoin;
+package com.enucs.enucoin.model;
 
-import org.json.JSONObject;
+//import org.json.JSONObject;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.time.Instant;
@@ -14,7 +15,11 @@ public class Block {
     private String previousHash;
     private String hash;
 
-    public Block(int index, Instant timestamp, Transaction transaction, String previousHash) {
+    public Block(
+            @JsonProperty("index") int index,
+            @JsonProperty("timestamp") Instant timestamp,
+            @JsonProperty("transaction") Transaction transaction,
+            @JsonProperty("previousHash") String previousHash) {
         this.index = index;
         this.timestamp = timestamp;
         this.transaction = transaction;
@@ -67,14 +72,5 @@ public class Block {
                 ", previousHash='" + previousHash + '\'' +
                 ", hash='" + hash + '\'' +
                 '}';
-    }
-
-    public JSONObject toJSON() {
-        return new JSONObject()
-                .put("index", index)
-                .put("timestamp", timestamp)
-                .put("previousHash", previousHash)
-                .put("hash", hash)
-                .put("transaction", transaction.toJSON());
     }
 }
