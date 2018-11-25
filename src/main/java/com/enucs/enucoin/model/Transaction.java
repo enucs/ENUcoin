@@ -1,7 +1,6 @@
-package com.enucs.enucoin;
+package com.enucs.enucoin.model;
 
-import org.json.JSONObject;
-
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.Instant;
 
 public class Transaction {
@@ -10,7 +9,11 @@ public class Transaction {
     private Instant paymentTime;
     private Double amount;
 
-    public Transaction(String sender, String recipient, Instant paymentTime, Double amount) {
+    public Transaction(
+            @JsonProperty("sender") String sender,
+            @JsonProperty("recipient") String recipient,
+            @JsonProperty("paymentTime") Instant paymentTime,
+            @JsonProperty("amount") Double amount) {
         this.sender = sender;
         this.recipient = recipient;
         this.paymentTime = paymentTime;
@@ -33,11 +36,5 @@ public class Transaction {
         return amount;
     }
 
-    public JSONObject toJSON() {
-        return new JSONObject()
-                .put("sender", sender)
-                .put("recipient", recipient)
-                .put("paymentTime", paymentTime)
-                .put("amount", amount);
-    }
+
 }

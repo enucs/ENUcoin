@@ -1,5 +1,7 @@
 package com.enucs.enucoin;
 
+import com.enucs.enucoin.model.Block;
+import com.enucs.enucoin.model.Transaction;
 import org.json.JSONObject;
 
 import java.time.Instant;
@@ -16,18 +18,10 @@ public class SingletonBlockchainFacade {
     }
 
     public static SingletonBlockchainFacade Instance() {
-        if(facade == null) {
+        if (facade == null) {
             facade = new SingletonBlockchainFacade();
         }
 
         return facade;
-    }
-
-    public void post(JSONObject transaction) {
-
-    }
-
-    public ArrayList<JSONObject> get() {
-        return null;
     }
 }
