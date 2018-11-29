@@ -35,4 +35,14 @@ public class Transaction {
     public double getAmount() {
         return amount;
     }
+
+    @Override
+    public String toString() {
+        return "Transaction{" +
+                "sender='" + sender + '\'' +
+                ", recipient='" + recipient + '\'' +
+                ", paymentTime=" + paymentTime +
+                ", amount=" + amount +
+                '}';
+    }
 }

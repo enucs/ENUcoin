@@ -1,11 +1,14 @@
 package com.enucs.enucoin.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.time.Instant;
 import java.util.Base64;
 
+@Document(collection = "blockchain")
 public class Block {
     private int index;
     private Instant timestamp;
