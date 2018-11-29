@@ -1,6 +1,7 @@
 package com.enucs.enucoin.controller;
 
 import com.enucs.enucoin.model.Block;
+import com.enucs.enucoin.model.Transaction;
 import com.enucs.enucoin.service.BlockService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -26,4 +27,10 @@ public class BlockController {
     public List<Block> getAllBlocks() {
         return blockService.getAllBlocks();
     }
+
+    @RequestMapping(
+            method = RequestMethod.POST,
+            consumes = MediaType.APPLICATION_JSON_VALUE
+    )
+    public void insertTransaction(@RequestBody Transaction transaction) { blockService.insertTransaction(transaction); }
 }

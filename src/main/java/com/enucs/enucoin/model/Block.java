@@ -1,7 +1,5 @@
 package com.enucs.enucoin.model;
 
-//import org.json.JSONObject;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

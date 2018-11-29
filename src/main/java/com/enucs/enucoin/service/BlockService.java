@@ -2,6 +2,7 @@ package com.enucs.enucoin.service;
 
 import com.enucs.enucoin.dao.BlockDAO;
 import com.enucs.enucoin.model.Block;
+import com.enucs.enucoin.model.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -17,4 +18,6 @@ public class BlockService {
     }
 
     public List<Block> getAllBlocks() { return blockDao.selectAllBlocks(); }
+
+    public void insertTransaction(Transaction transaction) { blockDao.insertTransaction(transaction); }
 }
